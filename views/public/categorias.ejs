@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorías | FREAK's</title>
+    <%- include('../partials/head') %>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../partials/navbar') %>
+
+<div class="container mt-5">
+    <div class="bg-white shadow-sm rounded p-4">
+        <h1 class="text-primary mb-4"><i class="fas fa-folder-open me-2"></i> Categorías</h1>
+
+        <% if (categorias && categorias.length > 0) { %>
+            <div class="row">
+                <% categorias.forEach(c => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="/categorias/<%= c.imagen && c.imagen.trim() !== '' ? c.imagen : 'generica.jpg' %>" class="card-img-top" alt="<%= c.nombre_categoria %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= c.nombre_categoria %></h5>
+                                <p class="card-text"><%= c.cursos?.length || 0 %> cursos</p>
+                                <a href="/categoria/<%= c.id_categoria %>" class="btn btn-outline-primary">
+                                    Ver cursos <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-muted">No hay categorías disponibles.</p>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

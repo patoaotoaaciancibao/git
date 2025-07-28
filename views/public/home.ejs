@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<% if (process.env.TEST_E2E === 'true') { %>
+    <style>
+        .wow, .fadeInUp {
+            animation: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+<% } %>
+<head>
+    <meta charset="utf-8">
+    <title>eLEARNING - eLearning HTML Template</title>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+<%- include('../partials/navbar') %>
+
+<!-- Inicio - Bloques de navegación rápida -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <a href="/cursos" class="text-decoration-none">
+                    <div class="service-item text-center pt-3 h-100">
+                        <div class="p-4">
+                            <i class="fas fa-book fa-3x text-primary mb-3"></i>
+                            <h5 class="mb-2">Cursos</h5>
+                            <p class="mb-0">Explora nuestra lista de cursos activos.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <a href="/categorias" class="text-decoration-none">
+                    <div class="service-item text-center pt-3 h-100">
+                        <div class="p-4">
+                            <i class="fas fa-list fa-3x text-primary mb-3"></i>
+                            <h5 class="mb-2">Categorías</h5>
+                            <p class="mb-0">Conocé nuestras categorías populares.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <a href="/profesores" class="text-decoration-none">
+                    <div class="service-item text-center pt-3 h-100">
+                        <div class="p-4">
+                            <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
+                            <h5 class="mb-2">Profesores</h5>
+                            <p class="mb-0">Descubrí a nuestros docentes destacados.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <a href="/team" class="text-decoration-none">
+                    <div class="service-item text-center pt-3 h-100">
+                        <div class="p-4">
+                            <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                            <h5 class="mb-2">Sobre Nosotros</h5>
+                            <p class="mb-0">Conocé más sobre nuestro proyecto educativo.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin de bloques de navegación rápida -->
+
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Carousel Start -->
+
+<div class="container-fluid p-0 mb-5">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="/img/carousel-4.jpg" alt="Nuestros Profesores">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-sm-10 col-lg-8">
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Descubre Quiénes Somos</h5>
+                            <h1 class="display-3 text-white animated slideInDown">Conoce a nuestros Expertos Instructores</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Aprende y crece junto a los profesionales más destacados de Freak's.</p>
+                            <a href="/auth/profesores" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Ver Profesores</a>
+                            <a href="/auth/about" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Saber Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="/img/carousel-3.jpg" alt="Todos los Cursos">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-sm-10 col-lg-8">
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Tu Camino al Conocimiento</h5>
+                            <h1 class="display-3 text-white animated slideInDown">Descubre la Amplia Oferta de Cursos</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Accede a una biblioteca completa de cursos en línea, a tu ritmo.</p>
+                            <a href="/auth/courses" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Ver Todos los Cursos</a>
+                            <a href="/auth/about" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Saber Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="/img/carousel-2.jpg" alt="Buscar Cursos">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-sm-10 col-lg-8">
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Encuentra Tu Curso Ideal</h5>
+                            <h1 class="display-3 text-white animated slideInDown">Utiliza Nuestro Buscador</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Filtra por nombre y encuentra lo que necesitas.</p>
+                            <a href="/auth/buscar" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Buscar Cursos</a>
+                            <a href="/auth/about" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Saber Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="/img/carousel-1.jpg" alt="Iniciar Sesión">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-sm-10 col-lg-8">
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Accede a tu cuenta</h5>
+                            <h1 class="display-3 text-white animated slideInDown">Ya eres parte de Freak's?</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Inicia sesión para acceder a tu perfil, tus cursos y mucho más.</p>
+                            <a href="/public/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Iniciar Sesión</a>
+                            <a href="/auth/about" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Saber Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Carousel End -->
+
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                        <h5 class="mb-3">Skilled Instructors</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                        <h5 class="mb-3">Online Classes</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                        <h5 class="mb-3">Home Projects</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                        <h5 class="mb-3">Book Library</h5>
+                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="/img/about.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
+                <h1 class="mb-4">Conocé a nuestro equipo</h1>
+                <p class="mb-4">
+                    Somos un grupo de estudiantes comprometidos con la creación de soluciones tecnológicas efectivas y accesibles. Este proyecto forma parte de nuestro trabajo en equipo para la materia de Sistemas Informáticos.
+                </p>
+                <p class="mb-4">
+                    Nos enfocamos en construir plataformas funcionales que brinden valor a los usuarios, combinando nuestros conocimientos de desarrollo web, diseño y gestión de datos.
+                </p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Compromiso con la calidad</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Trabajo colaborativo</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Enfoque en el usuario</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Aprendizaje continuo</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-3 mt-2">
+                    <a class="btn btn-outline-primary py-3 px-4" href="/team">
+                        <i class="fas fa-users me-2"></i>Read More
+                    </a>
+                    <a class="btn btn-outline-primary py-3 px-4" href="/admin/listado-profesores">
+                        <i class="fas fa-chalkboard-teacher me-2"></i>Ver Profesores Asignados
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><!-- About End -->
+
+
+
+<!-- Categories Start -->
+<div class="container-xxl py-5 category">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Categorias</h6>
+            <h1 class="mb-5">Categorias - Cursos</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-7 col-md-6">
+                <div class="row g-3">
+                    <% for (let i = 0; i < 3; i++) {
+                        const cat = categoriasPopulares[i];
+                    if (cat) { %>
+                        <div class="col-lg-<%= i === 0 ? '12' : '6' %> col-md-12 wow zoomIn" data-wow-delay="<%= 0.1 + (i * 0.2) %>s">
+                            <a class="position-relative d-block overflow-hidden" href="/categoria/<%= cat.id_categoria %>">
+                                <img class="img-fluid" src="/categorias/<%= cat.imagen && cat.imagen.trim() !== '' ? cat.imagen : 'generica.jpg' %>" alt="<%= cat.nombre_categoria %>">
+                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0"><%= cat.nombre_categoria %></h5>
+                                    <small class="text-primary"><%= cat.cantidad_cursos %> Cursos</small>
+                                </div>
+                            </a>
+                        </div>
+                    <% } } %>
+                </div>
+            </div>
+
+            <% if (categoriasPopulares[3]) {
+                const cat = categoriasPopulares[3]; %>
+            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                <a class="position-relative d-block h-100 overflow-hidden" href="/categoria/<%= cat.id_categoria %>">
+                    <img class="img-fluid position-absolute w-100 h-100" src="/categorias/<%= cat.imagen && cat.imagen.trim() !== '' ? cat.imagen : 'generica.jpg' %>" alt="<%= cat.nombre_categoria %>" style="object-fit: cover;">
+                    <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                        <h5 class="m-0"><%= cat.nombre_categoria %></h5>
+                        <small class="text-primary"><%= cat.cantidad_cursos %> Cursos</small>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- Categories Start -->
+
+
+<!-- Courses Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Cursos Populares</h6>
+            <h1 class="mb-5">Cursos Más Populares</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <% if (cursosPopulares && cursosPopulares.length > 0) { %>
+                <% cursosPopulares.forEach(curso => { %>
+    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="course-item bg-light">
+      <div class="position-relative overflow-hidden">
+        <img class="img-fluid" src="/cursos/<%= curso.imagen || 'default.png' %>" alt="<%= curso.nombre %>">
+        <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+          <a href="/auth/curso/<%= curso.id_curso %>" class="btn btn-sm btn-primary py-2 px-3">Ver Curso</a>
+
+
+        </div>
+      </div>
+            <div class="text-center p-4">
+                <h5 class="mb-4" ><%=curso.nombre_curso%></h5>
+                <div class="d-flex border-top">
+                <small class="flex-fill text-center border-end py-2">
+                    <i class="fa fa-user-graduate me-2"></i><%= curso.cantidad_inscriptos %> Estudiantes
+                </small>
+                </div>
+            </div>
+            </div>
+        </div>
+        <% }); %>
+
+            <% } else { %>
+                <div class="col-12 text-center">
+                    <p class="text-muted">📭 No hay cursos populares disponibles en este momento.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- Courses End -->
+
+
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Instructors</h6>
+            <h1 class="mb-5">Expert Instructors</h1>
+        </div>
+        <div class="row g-4">
+            <% profesores.forEach((profesor, index) => { %>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="<%= 0.1 + (index * 0.2) %>s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <%
+                                const imageNumber = (index % 4) + 1;
+                                const imageUrl = `/img/team-${imageNumber}.jpg`;
+                            %>
+                            <img class="img-fluid" src="<%= imageUrl %>" alt="Profesor <%= profesor.nombre %>">
+
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0"><%= profesor.nombre %> <%= profesor.apellido %></h5>
+                            <small><%= profesor.email %></small>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+
+<!-- Testimonials Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Comentarios</h6>
+            <h1 class="mb-5">Lo que dicen nuestros alumnos</h1>
+        </div>
+        <div class="row g-4">
+            <% if (ultimosComentarios.length > 0) { %>
+                <% ultimosComentarios.forEach(comentario => { %>
+                    <div class="col-lg-6">
+                        <div class="testimonial-item bg-light rounded p-4">
+                            <h5 class="mb-1"><i class="fa fa-user me-2"></i><%= comentario.nombre_usuario %></h5>
+                            <p class="text-muted mb-1"><i class="fa fa-book me-2"></i><%= comentario.nombre_curso %></p>
+                            <p class="mb-2"><%= comentario.comentario %></p>
+                            <p class="mb-0">
+                                <% for(let i = 1; i <= 5; i++) { %>
+                                    <% if (i <= comentario.estrellas) { %>
+                                        <i class="fas fa-star text-warning"></i>
+                                    <% } else { %>
+                                        <i class="far fa-star text-muted"></i>
+                                    <% } %>
+                                <% } %>
+                            </p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-muted text-center">No hay comentarios aún.</p>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- Testimonials End -->
+
+
+<%- include('../partials/footer') %>
+
+
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/lib/wow/wow.min.js"></script>
+<script src="/lib/easing/easing.min.js"></script>
+<script src="/lib/waypoints/waypoints.min.js"></script>
+<script src="/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

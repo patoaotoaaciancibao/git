@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calificaciones de los Alumnos</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    h2 {
+      color: #343a40;
+      margin-bottom: 30px;
+    }
+
+    .table {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th,
+    .table td {
+      text-align: center;
+      padding: 12px;
+      font-size: 1.1rem;
+    }
+
+    .table thead {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+
+    .alert {
+      font-size: 1.1rem;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<div class="container">
+  <h2>Calificaciones del Curso: <%= idCurso %></h2>
+  
+  <!-- Mostrar mensaje de éxito o error -->
+  <% if (messages.success) { %>
+    <div class="alert alert-success">
+      <%= messages.success %>
+    </div>
+  <% } %>
+
+  <% if (messages.error) { %>
+    <div class="alert alert-danger">
+      <%= messages.error %>
+    </div>
+  <% } %>
+
+  <!-- Tabla de calificaciones -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Calificación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% alumnos.forEach(alumno => { %>
+        <tr>
+          <td><%= alumno.nombre %> <%= alumno.apellido %></td>
+          <td><%= alumno.calificacion || 'No calificado' %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <!-- Botón para volver al curso -->
+  <a href="/admin/curso/<%= idCurso %>" class="btn btn-outline-primary">
+    <i class="fas fa-arrow-left"></i> Volver al Curso
+  </a>
+
+</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Correlativas</title>
+  <%- include('../../partials/head') %>
+<style>
+  .form-correlativa {
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+  }
+</style>
+</head>
+<body>
+  <%- include('../../partials/navbar') %>
+  <div class="container py-5">
+    <h1>Gestión de Correlativas</h1>
+
+    <%# Botón para ir a Admin Home %>
+    <a href="/admin/home" class="btn btn-secondary mb-3">← Volver a Inicio de Admin</a>
+
+    <% if (messages.success) { %>
+      <div class="alert alert-success"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+      <div class="alert alert-danger"><%= messages.error %></div>
+    <% } %>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <h2>Cursos con Correlativas</h2>
+        <% if (cursosConCorrelativas.length) { %>
+          <ul class="list-group">
+            <% cursosConCorrelativas.forEach(c => { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= c.nombre_curso %>
+                <a href="/admin/correlativas/curso/<%= c.id_curso %>" class="btn btn-sm btn-info">
+                  Gestionar requisitos
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <div class="alert alert-warning">No hay cursos con correlativas definidas aún.</div>
+        <% } %>
+      </div>
+
+<div class="container mt-4">
+    <h2>Añadir Nueva Correlativa</h2>
+
+    <%# Mensajes flash (éxito/error) %>
+    <% if (messages.success) { %>
+        <div class="alert alert-success"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+        <div class="alert alert-danger"><%= messages.error %></div>
+    <% } %>
+
+    <form action="/admin/correlativas/crear" method="POST">
+        <div class="mb-3">
+            <label for="id_curso" class="form-label">Curso al que quieres añadir la correlativa:</label>
+            <select class="form-select" id="id_curso" name="id_curso" required>
+                <option value="">Selecciona un curso</option>
+                <% todosLosCursos.forEach(curso => { %>
+                    <option value="<%= curso.id %>"><%= curso.nombre %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="id_curso_requisito" class="form-label">Curso requisito (correlativa):</label>
+            <select class="form-select" id="id_curso_requisito" name="id_curso_requisito" required>
+                <option value="">Selecciona un curso requisito</option>
+                <%# Asegúrate de que esta lista sea la misma que la del primer select si ambos son todos los cursos. %>
+                <% todosLosCursos.forEach(curso => { %>
+                    <option value="<%= curso.id %>"><%= curso.nombre %></option>
+                <% }); %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Añadir Correlativa</button>
+    </form>
+</div>
+      </div>
+    </div>
+  </div>
+  <%- include('../../partials/footer') %>
+</body>
+</html>

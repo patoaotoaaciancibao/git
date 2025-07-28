@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Contáctanos - Freak's</title> <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="/img/favicon.ico" rel="icon"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/lib/animate/animate.min.css" rel="stylesheet"> <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> <link href="/css/bootstrap.min.css" rel="stylesheet"> <link href="/css/style.css" rel="stylesheet"> <link href="/css/header.css" rel="stylesheet"> </head>
+
+<body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
+    <%- include('../partials/navbar') %> <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Contáctanos</h1> <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/auth/home">Inicio</a></li> <li class="breadcrumb-item"><a class="text-white" href="#">Páginas</a></li> <li class="breadcrumb-item text-white active" aria-current="page">Contacto</li> </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Contáctanos</h6> <h1 class="mb-5">Contacta para Cualquier Consulta</h1> </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h5>Ponte en Contacto</h5> <p class="mb-4">El formulario de contacto está actualmente inactivo. Para un formulario funcional, por favor, envía un correo electrónico directamente a nuestra dirección de contacto.</p> <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary" style="width: 50px; height: 50px;">
+                            <i class="fa fa-map-marker-alt text-white"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="text-primary">Oficina</h5> <p class="mb-0">Benjamin Aceval, Guarambare, Paraguay</p> </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary" style="width: 50px; height: 50px;">
+                            <i class="fa fa-phone-alt text-white"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="text-primary">Móvil</h5> <p class="mb-0">0293 932945</p> </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary" style="width: 50px; height: 50px;">
+                            <i class="fa fa-envelope-open text-white"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="text-primary">Email</h5> <p class="mb-0">recepcion.gre@uc.edu.py</p> </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <iframe class="position-relative rounded w-100 h-100"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.323568469859!2d-57.3698717849819!3d-25.29133808386121!2m3!1f0!2m3!1f0!2m3!1f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945d8b7b7f7e914f%3A0xc3f9b2f6b3e3e3b3!2sBenjamin%20Aceval%2C%20Paraguay!5e0!3m2!1ses-419!2spy!4v1625412345678!5m2!1ses-419!2spy"
+                        frameborder="0" style="min-height: 300px; border:0;" allowfullscreen="" aria-hidden="false"
+                        tabindex="0"></iframe>
+                </div>
+                <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Tu Nombre">
+                                    <label for="name">Tu Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Tu Email">
+                                    <label for="email">Tu Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Asunto">
+                                    <label for="subject">Asunto</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Escribe tu mensaje aquí" id="message" style="height: 150px"></textarea>
+                                    <label for="message">Mensaje</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Enviar Mensaje</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer') %>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/wow/wow.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/waypoints/waypoints.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

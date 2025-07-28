@@ -1,0 +1,46 @@
+<!-- views/admin/cursos/calificar.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calificar Alumnos</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+  <h1>Calificar Alumnos del Curso: <%= idCurso %></h1>
+
+  <form action="/admin/curso/<%= idCurso %>/calificar" method="POST">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Calificación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% alumnos.forEach(alumno => { %>
+        <tr>
+          <td><%= alumno.nombre %> <%= alumno.apellido %></td>
+          <td>
+            <select name="calificaciones[<%= alumno.id %>]" class="form-control">
+              <option value="Aprobado" <%= alumno.calificacion === 'Aprobado' ? 'selected' : '' %>>Aprobado</option>
+              <option value="Reprobado" <%= alumno.calificacion === 'Reprobado' ? 'selected' : '' %>>Reprobado</option>
+              <option value="" <%= !alumno.calificacion ? 'selected' : '' %>>No calificado</option>
+            </select>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-success">Guardar Calificaciones</button>
+</form>
+
+</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

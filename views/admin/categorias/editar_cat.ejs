@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Categoría</title>
+    <%- include('../../partials/head') %>
+
+</head>
+<body>
+<style>
+    .alert-auto {
+        font-size: 0.9rem;
+        max-width: 500px;
+        margin: 0 auto 20px;
+        padding: 10px 16px;
+        opacity: 1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 999;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .alert-auto.fade-out {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+</style>
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Editar Categoría</h1>
+
+<% if (errors && errors.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 alert-auto" role="alert">
+            <strong><i class="fas fa-exclamation-triangle me-2"></i> Error:</strong>
+            <ul class="mb-0 mt-2">
+                <% errors.forEach(error => { %>
+                    <li><%= error %></li>
+                <% }); %>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    <% } %>
+
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+        <form action="/admin/categorias/editar/<%= categoria.id_categoria %>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de la Categoría</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<%= categoria.nombre_categoria %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Imagen Actual</label><br>
+                <% if (categoria.imagen) { %>
+                    <img src="/categorias/<%= categoria.imagen %>" alt="Imagen de la categoría" class="img-fluid rounded mb-2" style="max-height: 200px;">
+                <% } else { %>
+                    <img src="/categorias/generica.jpg" alt="Imagen genérica" class="img-fluid rounded mb-2" style="max-height: 200px;">
+                <% } %>
+            </div>
+
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Reemplazar Imagen (JPG, PNG, WEBP)</label>
+                <input
+                        type="file"
+                        class="form-control"
+                        id="imagen"
+                        name="imagen"
+                        accept="image/jpeg, image/png, image/webp">
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="/admin/categorias" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const alertAuto = document.querySelector('.alert-auto');
+        if (alertAuto) {
+            setTimeout(() => {
+                alertAuto.classList.add('fade-out');
+                setTimeout(() => alertAuto.remove(), 500); // Se elimina después de desvanecerse
+            }, 5000);
+        }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="/assets/js/main.js"></script>
+
+<%- include('../../partials/footer') %>
+</body>
+</html>

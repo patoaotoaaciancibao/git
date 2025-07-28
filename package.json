@@ -1,0 +1,39 @@
+{
+  "name": "ucgre-grupo-3-naranja-primer-parcial",
+  "version": "1.0.0",
+  "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
+  "main": "index.js",
+  "scripts": {
+    "test-cat": "jest tests/e2e/categorias.test.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index",
+    "test-profesor": "cross-env TEST_E2E=true npx playwright test tests/e2e/asignar-profesor.spec.js --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^2.2.0",
+    "connect-flash": "^0.1.1",
+    "connect-sqlite3": "^0.9.15",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "multer": "^2.0.1",
+    "nodemailer": "^7.0.5",
+    "nodemon": "^3.1.10",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@playwright/test": "^1.54.1",
+    "cheerio": "^1.1.0",
+    "cross-env": "^7.0.3",
+    "jest": "^30.0.0",
+    "supertest": "^7.1.1"
+  }
+}

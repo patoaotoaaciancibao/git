@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación de Inscripción</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      line-height: 1.4;
+    }
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .header img {
+      max-width: 150px;
+    }
+    .content {
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+    .user-info, .course-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .user-info img,
+    .course-info img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #28a745;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.8em;
+      color: #666;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <!-- Logo incrustado con cid:logo -->
+    <img src="cid:logo" alt="Logo de <%= siteName %>">
+  </div>
+
+  <div class="content">
+    <p>Hola <strong><%= student.nombre %> <%= student.apellido %></strong>,</p>
+    <p>¡Ya estás inscrito en un nuevo curso! A continuación los detalles:</p>
+
+    <div class="section user-info">
+      <img src="cid:perfil" alt="Foto de <%= student.nombre %>">
+      <div>
+        <h2>Datos del Alumno</h2>
+        <p><strong>Nombre:</strong> <%= student.nombre %> <%= student.apellido %></p>
+        <p><strong>Email:</strong> <%= student.email %></p>
+      </div>
+    </div>
+
+    <div class="section course-info">
+      <img src="cid:portada" alt="Portada de <%= curso.nombre %>">
+      <div>
+        <h2>Datos del Curso</h2>
+        <p><strong>Categoría:</strong> <%= categoria.nombre_categoria %></p>
+        <p><strong>Curso:</strong> <%= curso.nombre %></p>
+      </div>
+    </div>
+
+    <p>Puedes acceder directamente al curso haciendo clic en el botón:</p>
+    <p style="text-align: center;">
+      <a class="btn" href="<%= linkCurso %>">Ver mi curso</a>
+    </p>
+
+    <p>¡Gracias por elegir <%= siteName %>!</p>
+  </div>
+
+  <div class="footer">
+    <p>&copy; <%= new Date().getFullYear() %> <%= siteName %>. Todos los derechos reservados.</p>
+  </div>
+</body>
+</html>

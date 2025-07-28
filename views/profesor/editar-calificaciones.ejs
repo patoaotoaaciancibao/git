@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Calificaciones</title>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+
+  <div class="container py-5">
+    <h1>Editar Calificaciones del Curso: <%= curso.nombre %></h1>
+
+    <% if (messages.success) { %>
+      <div class="alert alert-success"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+      <div class="alert alert-danger"><%= messages.error %></div>
+    <% } %>
+
+    <form action="/auth/cursos/<%= curso.id_curso %>/calificaciones" method="POST">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Alumno</th>
+            <th>Calificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% alumnos.forEach(alumno => { %>
+            <tr>
+              <td><%= alumno.nombre %> <%= alumno.apellido %></td>
+              <td>
+                <input
+                  type="number"
+                  name="calificaciones[<%= alumno.id %>]"
+                  value="<%= alumno.calificacion ?? '' %>"
+                  class="form-control"
+                  min="0"
+                  max="10"
+                  step="0.1"
+                >
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <button type="submit" class="btn btn-primary">Guardar Calificaciones</button>
+    </form>
+  </div>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

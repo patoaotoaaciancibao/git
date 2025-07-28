@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Curso: <%= curso.nombre %></title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<% if (messages.success) { %>
+  <div class="alert alert-success">
+    <%= messages.success %>
+  </div>
+<% } %>
+<% if (messages.error) { %>
+  <div class="alert alert-danger">
+    <%= messages.error %>
+  </div>
+<% } %>
+
+<div class="container py-5">
+  <!-- Portada e Información General -->
+  <div class="text-center mb-4">
+    <img src="/cursos/<%= curso.imagen || 'default.png' %>"
+         class="img-fluid rounded"
+         style="max-width:200px;"
+         alt="Portada del curso">
+    <h1 class="mt-3"><i class="fas fa-book-open"></i> <%= curso.nombre %></h1>
+    <p><strong>Descripción:</strong> <%= curso.descripcion || 'Sin descripción' %></p>
+    
+   <p>
+      <strong>Estado:</strong>
+      <% if (publicado) { %>
+        <span class="badge bg-success">Publicado</span>
+      <% } else { %>
+        <span class="badge bg-secondary">No publicado</span>
+      <% } %>
+    </p>
+
+    <% if (soyProfesor && !publicado) { %>
+      <!-- Publicar curso (profesor) -->
+      <form action="/auth/curso/<%= curso.id_curso %>/publicar" method="POST" class="d-inline">
+        <button class="btn btn-sm btn-success">
+          <i class="fas fa-upload"></i> Publicar curso
+        </button>
+      </form>
+    <% } %>
+  </div>
+
+  <!-- Acciones según rol -->
+  <div class="mb-4">
+    <% if (!soyProfesor && publicado) { %>
+      <% if (!estaInscripto) { %>
+        <!-- Inscripción alumno -->
+        <form action="/cursos/<%= curso.id_curso %>/inscribir" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-outline-success">
+            <i class="fas fa-plus-circle"></i> Inscribirme
+          </button>
+        </form>
+      <% } else { %>
+        <button class="btn btn-sm btn-outline-secondary" disabled>
+          <i class="fas fa-check-circle"></i> Ya estás inscripto
+        </button>
+      <% } %>
+    <% } %>
+  </div>
+
+
+   <% if (soyProfesor) { %>
+  <!-- Botón para editar las calificaciones (solo para el profesor) -->
+  <a href="/admin/curso/<%= curso.id_curso %>/calificar" class="btn btn-sm btn-outline-primary ms-2">
+    <i class="fas fa-pen"></i> Editar calificaciones
+  </a>
+
+  <!-- Botón para ver las calificaciones (solo para el profesor) -->
+  <a href="/admin/curso/<%= curso.id_curso %>/calificaciones" class="btn btn-sm btn-outline-info ms-2">
+    <i class="fas fa-eye"></i> Ver calificaciones
+  </a>
+<% } %>
+
+  <% /* Mostrar nota al alumno si ya existe */ %>
+  <% if (!soyProfesor && estaInscripto && calificacionAlumno != null) { %>
+    <div class="alert alert-info mt-3">
+      <strong>Tu calificación:</strong>
+      <span class="badge bg-primary"><%= calificacionAlumno %></span>
+    </div>
+  <% } %>
+
+  <!-- Secciones -->
+  <h4 class="mt-5"><i class="fas fa-list-alt"></i> Secciones del curso</h4>
+  <% if (secciones && secciones.length) { %>
+    <% secciones.forEach(sec => { %>
+      <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <strong><%= sec.titulo %></strong>
+          <% if (soyProfesor && !publicado) { %>
+            <a href="/auth/curso/<%= curso.id_curso %>/editar-seccion/<%= sec.id_seccion %>"
+               class="btn btn-sm btn-outline-warning">
+              <i class="fas fa-edit"></i> Editar
+            </a>
+          <% } %>
+        </div>
+        <div class="card-body">
+          <p><%= sec.descripcion || 'Sin descripción' %></p>
+          <% if (sec.video) { %>
+            <div class="mt-3">
+              <video controls style="width:100%; max-width:600px;">
+            <source 
+                src="/auth/stream-video/<%= sec.id_seccion %>/<%= curso.id_curso %>" 
+                type="video/mp4" 
+            />
+                Tu navegador no soporta reproducción de vídeo.
+              </video>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p class="text-muted">Aún no hay secciones.</p>
+  <% } %>
+
+  <!-- Valoración promedio -->
+  <% if (promedioEstrellas > 0) { %>
+    <h4>⭐ Promedio: <%= Math.round(promedioEstrellas * 10) / 10 %> / 5</h4>
+  <% } %>
+
+  <!-- Comentarios -->
+  <h4 class="mt-5"><i class="fas fa-comments"></i> Comentarios</h4>
+  <% if (comentariosCurso && comentariosCurso.length) { %>
+    <ul class="list-group">
+      <% comentariosCurso.forEach(c => { %>
+        <li class="list-group-item">
+          <strong><%= c.nombre_usuario %></strong>
+          <p class="mb-1"><%= c.comentario %></p>
+          <div>
+            <% for (let i = 1; i <= 5; i++) { %>
+              <% if (i <= c.estrellas) { %>
+                <i class="fas fa-star" style="color:gold;"></i>
+              <% } else { %>
+                <i class="far fa-star"></i>
+              <% } %>
+            <% } %>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="text-muted">Todavía no hay comentarios.</p>
+  <% } %>
+
+  <!-- Formulario para dejar comentario -->
+  <% if (estaInscripto || soyProfesor) { %>
+    <form action="/auth/curso/<%= curso.id_curso %>/comentarios" method="POST" class="mt-3">
+      <div class="mb-3">
+        <label for="comentario">Comentario</label>
+        <textarea id="comentario" name="comentario" class="form-control" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="estrellas">Calificación</label>
+        <select id="estrellas" name="estrellas" class="form-select" required>
+          <option value="" disabled selected>Selecciona...</option>
+          <% for (let i = 1; i <= 5; i++) { %>
+            <option value="<%= i %>"><%= i %> estrella<%= i>1?'es':'' %></option>
+          <% } %>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Enviar comentario
+      </button>
+    </form>
+  <% } %>
+
+  <div class="mt-5">
+    <a href="/<%= usuario.rol === 'admin' ? 'admin' : 'auth' %>/home"
+       class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left"></i> Volver
+    </a>
+  </div>

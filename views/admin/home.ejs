@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - NARANJA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            min-height: 100vh;
+        }
+        .card-home {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-radius: 1rem;
+        }
+        .card-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-home {
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+        }
+        .icon-large {
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<%- include('../partials/navbar') %>
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <i class="fas fa-tools fa-3x text-primary mb-3"></i>
+        <h1 class="fw-bold">Panel de Administración</h1>
+        <p class="text-muted">Gestioná el sistema desde aquí de forma sencilla y eficiente.</p>
+
+        <% if (query?.msg === 'profesor-asignado') { %>
+            <div class="alert alert-success alert-dismissible fade show mx-auto text-center mt-3" style="max-width: 500px;" role="alert">
+                <i class="fas fa-check-circle me-2"></i> Profesor asignado correctamente
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        <% } %>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+            <a href="/admin/logout" class="btn btn-outline-danger btn-home shadow-sm">
+                <i class="fas fa-sign-out-alt me-1"></i> Cerrar sesión
+            </a>
+            <a href="/admin/cursos" class="btn btn-outline-secondary btn-home shadow-sm">
+                <i class="fas fa-list me-1"></i> Ver lista de cursos
+            </a>
+            <a href="/admin/categorias" class="btn btn-outline-success btn-home shadow-sm">
+                <i class="fas fa-folder-open me-1"></i> Ver Categorías
+            </a>
+            <a class="btn btn-outline-primary btn-home shadow-sm" href="/admin/listado-profesores">
+                <i class="fas fa-chalkboard-teacher me-1"></i> Ver Profesores Asignados
+            </a>
+        </div>
+    </div>
+
+
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card card-home shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-book icon-large text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Crear Curso</h5>
+                    <p class="card-text text-muted">Agregá un nuevo curso al sistema de manera rápida y sencilla.</p>
+                    <a href="/admin/cursos/crear" class="btn btn-primary w-100 btn-home">
+                        <i class="fas fa-plus-circle me-1"></i> Ir a Crear Curso
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card card-home shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chalkboard-user icon-large text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Asignar Profesor</h5>
+                    <p class="card-text text-muted">Asigná fácilmente un profesor a cualquier curso activo.</p>
+                    <a href="/admin/asignar-profesor" class="btn btn-primary w-100 btn-home">
+                        <i class="fas fa-user-plus me-1"></i> Ir a Asignar Profesor
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card card-home shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-users-cog icon-large text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Gestión de Usuarios</h5>
+                    <p class="card-text text-muted">Visualizá y administrá todos los usuarios del sistema.</p>
+                    <a href="/admin/usuarios" class="btn btn-primary w-100 text-white btn-home">
+                        <i class="fas fa-eye me-1 text-white"></i> Ver Usuarios
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4" data-wow-delay="0.7s">
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Gestión de Inscripciones</h5>
+                    <p class="card-text text-muted">Visualizá todas las inscripciones a cursos de los alumnos.</p>
+                    <a href="/admin/inscripciones" class="btn btn-primary w-100 text-white btn-home">
+                        <i class="fas fa-eye me-1"></i> Ver Inscripciones
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card card-home shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-sitemap icon-large text-primary mb-3"></i> <h5 class="card-title fw-semibold">Gestión de Correlativas</h5>
+                    <p class="card-text text-muted">Definí y administrá los requisitos previos entre cursos.</p>
+                    <a href="/admin/correlativas" class="btn btn-primary w-100 btn-home">
+                        <i class="fas fa-link me-1"></i> Ir a Correlativas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-lg-4" data-wow-delay="0.7s">
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-bar fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Estadísticas Generales</h5>
+                    <p class="card-text text-muted" style="min-height: 48px;">Visualizá datos clave y métricas del sistema.</p>
+                    <a href="/admin/estadisticas" class="btn btn-primary w-100 text-white btn-home">
+                        <i class="fas fa-chart-line me-1"></i> Ver Estadísticas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if (typeof query !== 'undefined' && query.error === 'baja_admin') { %>
+    <div class="position-fixed" style="top: 90px; right: 25px; z-index: 1055; max-width: 400px;">
+        <div id="alertaBajaAdmin" class="alert alert-warning alert-dismissible fade show shadow-sm border-start border-4 border-warning-subtle rounded-3" role="alert">
+            <div class="d-flex align-items-start">
+                <i class="fas fa-circle-exclamation fa-lg text-warning me-3 mt-1"></i>
+                <div>
+                    <strong class="text-dark">Acción no permitida</strong>
+                    <div class="text-muted">No podés darte de baja porque sos administrador del sistema.</div>
+                </div>
+                <button type="button" class="btn-close ms-auto mt-1" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+
+<%- include('../partials/footer') %>
+<script>
+    const alerta = document.getElementById('alertaBajaAdmin');
+    if (alerta) {
+        setTimeout(() => {
+            const alertaBootstrap = bootstrap.Alert.getOrCreateInstance(alerta);
+            alertaBootstrap.close();
+        }, 4000);
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

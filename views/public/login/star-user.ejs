@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Login Usuario - NARANJA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow p-4" style="max-width: 450px; width: 100%;">
+        <h2 class="text-center mb-4">Acceso Usuario</h2>
+
+        <% if (query?.error === 'user') { %>
+            <div class="alert alert-danger text-center">
+                ⚠️ Correo electrónico o contraseña incorrectos.
+            </div>
+        <% } %>
+
+        <form action="/login/try" method="POST"> <!-- para usuario -->
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <div class="input-group position-relative">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" name="password" id="password" class="form-control" required minlength="6">
+                    <span class="position-absolute" style="top: 10px; right: 15px; cursor: pointer;" onclick="togglePassword()">
+                        <i class="fa fa-eye" id="toggleIcon"></i>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/public/home">⬅ Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById("password");
+        const icon = document.getElementById("toggleIcon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
+</script>
+
+</body>
+</html>

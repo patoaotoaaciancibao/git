@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dar de Baja | Freak’s</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<%- include('../partials/navbar') %>
+
+<section class="container mt-5">
+    <div class="text-center">
+        <h2 class="text-danger mb-4">¿Estás segura que querés darte de baja?</h2>
+        <p class="lead">Luego de confirmar, tu cuenta quedará inactiva y no podrás iniciar sesión hasta que un administrador la reactive.</p>
+
+        <form method="POST" action="/auth/dar-de-baja" class="d-inline-block mt-4">
+            <button class="btn btn-danger me-2" type="submit">
+                <i class="fas fa-user-slash me-1"></i> Sí, darme de baja
+            </button>
+            <a href="/auth/home" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Cancelar
+            </a>
+        </form>
+    </div>
+</section>
+<%- include('../partials/footer') %>
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        const confirm1 = confirm("¿Estás segura que querés darte de baja?");
+        if (!confirm1) {
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

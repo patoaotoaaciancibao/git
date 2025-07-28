@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos | Pluma Guaraní</title>
+    <%- include('../partials/head') %>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../partials/navbar') %>
+
+<div class="container mt-5">
+    <div class="bg-white shadow-sm rounded p-4">
+        <h1 class="text-primary mb-4"><i class="fas fa-book-open me-2"></i> Cursos disponibles</h1>
+
+        <% if (cursos && cursos.length > 0) { %>
+            <div class="row">
+                <% cursos.forEach(curso => { %>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img src="/cursos/<%= curso.imagen || 'default.png' %>" class="card-img-top" alt="Imagen del curso">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= curso.nombre %></h5>
+                                <p>
+                                    <%= curso.descripcion && curso.descripcion.trim().length >= 10
+                                            ? curso.descripcion
+                                            : 'Este curso incluye fundamentos esenciales sobre el tema.' %>
+                                </p>
+
+                                <a href="/auth/curso/<%= curso.id_curso %>" class="btn btn-outline-primary">
+                                    Ver curso <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-muted">No hay cursos disponibles actualmente.</p>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

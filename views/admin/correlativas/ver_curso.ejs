@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../../partials/head') %>
+    <title>Correlativas de Curso - Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/personas-curso.css">
+    <link rel="stylesheet" href="/css/cursos-listado.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %> <%# Usando tu navbar.ejs existente según tu carpeta partials %>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Correlativas para: <%= cursoPrincipal.nombre %></h1>
+
+        <%# Mensajes flash (éxito/error) %>
+        <% if (messages.success) { %>
+            <div class="alert alert-success"><%= messages.success %></div>
+        <% } %>
+        <% if (messages.error) { %>
+            <div class="alert alert-danger"><%= messages.error %></div>
+        <% } %>
+
+        <a href="/admin/correlativas" class="btn btn-secondary mb-3">← Volver a Gestión de Correlativas</a>
+
+        <h3 class="mt-4">Lista de Correlativas de <%= cursoPrincipal.nombre %></h3>
+        <% if (correlativas && correlativas.length > 0) { %>
+            <ul class="list-group mb-4">
+                <% correlativas.forEach(correlativa => { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <%# Usar 'nombre_curso_requisito' que viene del JOIN en correlativaModel %>
+                        <%= correlativa.nombre_curso_requisito %>
+                        <form action="/admin/correlativas/eliminar" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta correlativa?');">
+                            <input type="hidden" name="id_curso" value="<%= cursoPrincipal.id_curso %>"> <%# Asegúrate de usar cursoPrincipal.id_curso %>
+                            <input type="hidden" name="id_curso_requisito" value="<%= correlativa.id_curso_requisito %>">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>Este curso no tiene correlativas asignadas.</p>
+        <% } %>
+
+        <h3 class="mt-4">Añadir Nueva Correlativa a <%= cursoPrincipal.nombre %></h3>
+        <form action="/admin/correlativas/crear" method="POST">
+            <input type="hidden" name="id_curso" value="<%= cursoPrincipal.id_curso %>"> <%# ID del curso principal %>
+            <div class="mb-3">
+                <label for="id_curso_requisito" class="form-label">Seleccionar Curso Requisito:</label>
+                <select class="form-select" id="id_curso_requisito" name="id_curso_requisito" required>
+                    <option value="">Selecciona un curso</option>
+                    <% if (todosLosCursos && todosLosCursos.length > 0) { %>
+                        <% todosLosCursos.forEach(curso => { %>
+                            <%# No permitir seleccionar el mismo curso como correlativa y que el curso principal no sea una opción %>
+                            <% if (curso.id_curso !== cursoPrincipal.id_curso) { %>
+                                <option value="<%= curso.id_curso %>"><%= curso.nombre %></option>
+                            <% } %>
+                        <% }); %>
+                    <% } %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir Correlativa</button>
+        </form>
+    </div>
+
+    <%- include('../../partials/footer') %>
+    <%# Si tenías scripts importantes cargados desde partials/scripts, deberás moverlos a otra parte o incluirlos directamente en esta vista. %>
+    <%# Por ejemplo, puedes incluir un archivo JS específico de esta vista si lo necesitas: %>
+    <%# <script src="/js/tu-script-aqui.js"></script> %>
+    <%# O scripts de Bootstrap si no están en tu head.ejs: %>
+    <%# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> %>
+</body>
+</html>

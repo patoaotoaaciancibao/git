@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+<%- include('../partials/navbar') %>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+
+            <!-- Encabezado -->
+            <div class="text-center mb-4">
+                <i class="fas fa-user-plus fa-3x text-primary mb-2"></i>
+                <h2 class="fw-bold text-dark">Asignar Usuario a Curso</h2>
+                <p class="text-muted">Seleccioná cualquier usuario para asignarlo al curso</p>
+            </div>
+
+            <!-- Alertas -->
+            <% if (query?.msg === 'asignacion-existe') { %>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <div>⚠ El usuario ya está asignado a este curso.</div>
+              </div>
+            <% } else if (query?.msg === 'profesor-asignado') { %>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <div>¡Usuario asignado correctamente!</div>
+              </div>
+            <% } %>
+
+            <% if (query?.msg === 'error-interno') { %>
+              <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="fas fa-times-circle me-2"></i>
+                <div>❌ Ocurrió un error al intentar asignar el usuario.</div>
+              </div>
+            <% } %>
+
+            <!-- Card con formulario -->
+            <div class="card shadow-sm rounded-4 p-4 bg-white">
+              <form action="/admin/asignar-profesor" method="POST">
+
+                <div class="mb-3">
+                  <label for="id_curso" class="form-label fw-semibold">Curso</label>
+                  <select name="id_curso" id="id_curso" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un curso</option>
+                    <% cursos.forEach(curso => { %>
+                      <option value="<%= curso.id || curso.id_curso %>"><%= curso.nombre %></option>
+                    <% }) %>
+                  </select>
+                </div>
+
+                <div class="mb-4">
+                  <label for="id_usuario" class="form-label fw-semibold">Usuario</label>
+                  <select name="id_usuario" id="id_usuario" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un usuario</option>
+                    <% usuarios.forEach(u => { %>
+                      <option value="<%= u.id || u.id_usuario %>">
+                        <%= u.nombre %> <span class="text-muted">(<%= u.rol %>)</span>
+                      </option>
+                    <% }) %>
+                  </select>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-info text-white">
+                    <i class="fas fa-paper-plane me-1"></i> Asignar Usuario
+                  </button>
+                </div>
+
+              </form>
+            </div>
+
+        </div>
+        <div class="text-center mt-4">
+          <a href="/admin/listado-profesores" class="btn btn-primary">
+            <i class="fas fa-arrow-left me-1"></i> Ver Asignaciones
+          </a>
+        </div>
+    </div>
+</div>
+
+<!-- Validación simple -->
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    if (!document.getElementById('id_curso').value || !document.getElementById('id_usuario').value) {
+      alert('⚠️ Por favor, seleccioná un curso y un usuario antes de asignar.');
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<%- include('../partials/footer') %>
+</body>
+</html>

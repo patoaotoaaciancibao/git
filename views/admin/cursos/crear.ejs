@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Curso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <!-- Encabezado -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">📚 Crear Curso</h2>
+                <p class="text-muted">Completá los datos para agregar un nuevo curso al sistema.</p>
+            </div>
+
+            <!-- Mensajes -->
+            <% if (query?.error === 'campos') { %>
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <div>⚠ Todos los campos son obligatorios.</div>
+                </div>
+            <% } else if (query?.msg === 'curso-creado') { %>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <div>✅ ¡Curso creado correctamente!</div>
+                </div>
+            <% } %>
+
+            <!-- Card con Formulario -->
+            <div class="card shadow-sm rounded-4 p-4 bg-white">
+                <form action="/admin/cursos/crear" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-semibold">Nombre del curso</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Introducción a HTML" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="descripcion" class="form-label fw-semibold">Descripción</label>
+                        <textarea name="descripcion" id="descripcion" rows="4" class="form-control" placeholder="Breve descripción del curso" required></textarea>
+                    </div>
+                    <!-- NUEVO campo para subir imagen -->
+                      <div class="mb-4">
+                        <label for="imagen" class="form-label fw-semibold">Imagen del curso</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control" accept=".jpg,.jpeg,.png,.webp">
+                        <small class="form-text text-muted">Formatos permitidos: jpg, jpeg, png, webp.</small>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-1"></i> Guardar Curso
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="text-center mt-4">
+            <a href="/admin/home" class="btn btn-primary">
+                <i class="fas fa-arrow-left me-1"></i> Volver al Admin
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

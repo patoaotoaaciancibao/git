@@ -1,0 +1,62 @@
+/* ================================== */
+/* ====== Estilos para Personas por Curso ====== */
+/* ================================== */
+
+.personas-curso-titulo {
+    color: #343a40; /* Gris oscuro elegante */
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.personas-curso-card-header {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.personas-curso-badge {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3em 0.6em;
+    border-radius: 0.5rem;
+}
+
+.personas-curso-badge-profesor {
+    background-color: #0d6efd; /* Azul Bootstrap */
+    color: white;
+}
+
+.personas-curso-badge-alumno {
+    background-color: #198754; /* Verde Bootstrap */
+    color: white;
+}
+
+.personas-curso-table thead {
+    background-color: #f8f9fa; /* Fondo claro para encabezados */
+}
+
+.personas-curso-table td,
+.personas-curso-table th {
+    vertical-align: middle;
+}
+
+.personas-curso-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.personas-curso-icon {
+    margin-right: 0.5rem;
+}
+
+.personas-curso-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+}
+
+.personas-curso-text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+}

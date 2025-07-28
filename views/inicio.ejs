@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Bienvenido - NARANJA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Estilos base -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="container py-5 text-center">
+    <h1 class="mb-4">¡Bienvenido al Sistema UC!</h1>
+    <p class="lead mb-5">Seleccioná tu tipo de acceso:</p>
+
+    <div class="d-flex justify-content-center gap-4">
+        <a href="/auth/login" class="btn btn-primary btn-lg">
+            <i class="fas fa-user"></i> Soy Usuario
+        </a>
+        <a href="/public/admin-login" class="btn btn-secondary btn-lg">
+            <i class="fas fa-user-shield"></i> Soy Administrador
+        </a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

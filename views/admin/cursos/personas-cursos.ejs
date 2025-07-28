@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Personas del Curso</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/personas-curso.css" rel="stylesheet"> <!-- 🎨 Tu CSS exclusivo -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="personas-curso-titulo">
+            <i class="fas fa-users personas-curso-icon"></i> Personas del Curso: <%= curso.nombre %>
+        </h1>
+        <a href="/admin/cursos" class="btn btn-outline-secondary shadow-sm rounded-pill personas-curso-btn">
+            <i class="fas fa-arrow-left me-2"></i> Volver al Listado
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Profesores -->
+        <div class="col-md-6">
+            <div class="card personas-curso-card">
+                <div class="card-header bg-primary text-white rounded-top-4 personas-curso-card-header">
+                    <i class="fas fa-chalkboard-teacher personas-curso-icon"></i> Profesores
+                </div>
+                <div class="card-body">
+                    <% if (profesores.length > 0) { %>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle personas-curso-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% profesores.forEach((profesor, index) => { %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><i class="fas fa-user-tie personas-curso-icon text-primary"></i> <%= profesor.nombre %> <%= profesor.apellido %></td>
+                                        <td><%= profesor.email %></td>
+                                        <td><span class="personas-curso-badge personas-curso-badge-profesor">Profesor</span></td>
+                                    </tr>
+                                <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } else { %>
+                        <p class="personas-curso-text-muted">No hay profesores asignados.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alumnos -->
+        <div class="col-md-6">
+            <div class="card personas-curso-card">
+                <div class="card-header bg-success text-white rounded-top-4 personas-curso-card-header">
+                    <i class="fas fa-user-graduate personas-curso-icon"></i> Alumnos
+                </div>
+                <div class="card-body">
+                    <% if (alumnos.length > 0) { %>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle personas-curso-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% alumnos.forEach((alumno, index) => { %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><i class="fas fa-user personas-curso-icon text-success"></i> <%= alumno.nombre %> <%= alumno.apellido %></td>
+                                        <td><%= alumno.email %></td>
+                                        <td><span class="personas-curso-badge personas-curso-badge-alumno">Alumno</span></td>
+                                    </tr>
+                                <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } else { %>
+                        <p class="personas-curso-text-muted">No hay alumnos inscriptos.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Curso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+    <h1 class="mb-4 text-center"><i class="fas fa-search"></i> Buscar Cursos</h1>
+
+    <form method="POST" action="/auth/buscar" class="mb-4">
+        <div class="input-group">
+            <input type="text" class="form-control" id="nombreCurso" name="nombre" placeholder="Nombre del curso..." autocomplete="off" required>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+    </form>
+
+    <% if (cursos && cursos.length > 0) { %>
+        <div class="mt-4">
+            <h4>Resultados para: "<%= query %>"</h4>
+            <div class="row mt-3">
+                <% cursos.forEach(curso => { %>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-sm h-100 border-0">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2"><%= curso.nombre %></h5>
+                                <p class="card-text text-muted small">
+                                    ID: <%= curso.id || curso.id_curso %><br>
+                                    <%= curso.descripcion ? curso.descripcion : 'Sin descripción disponible' %>
+                                </p>
+                                <a href="/auth/curso/<%= curso.id || curso.id_curso %>" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i> Ver Curso
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% } else if (cursos) { %>
+        <p class="mt-4 text-muted"><i class="fas fa-exclamation-circle"></i> No se encontraron cursos publicados con ese nombre.</p>
+    <% } else { %>
+        <!-- 🔍 Resultados en vivo -->
+        <div id="resultados-en-vivo" class="mt-4"></div>
+    <% } %>
+        <div class="text-center mt-5">
+        <a href="/<%= usuario.rol === 'admin' ? 'admin' : 'auth' %>/home" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+        </div>
+
+
+
+</div>
+
+<%- include('../../partials/footer') %>
+
+<script>
+    const input = document.getElementById('nombreCurso');
+    const resultadosDiv = document.getElementById('resultados-en-vivo');
+
+    input.addEventListener('input', async function () {
+        const nombre = this.value.trim();
+        if (!resultadosDiv) return;
+
+        if (nombre.length === 0) {
+            resultadosDiv.innerHTML = '';
+            return;
+        }
+
+        try {
+            const res = await fetch('/auth/buscar/live', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre })
+            });
+
+            const cursos = await res.json();
+
+            if (Array.isArray(cursos) && cursos.length > 0) {
+                resultadosDiv.innerHTML = '<h5>Coincidencias:</h5><ul class="list-group mt-2">';
+                cursos.forEach(curso => {
+                    resultadosDiv.innerHTML += `
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            ${curso.nombre}
+                            <a href="/auth/curso/${curso.id || curso.id_curso}" class="btn btn-outline-info btn-sm">
+                                <i class="fas fa-eye"></i> Ver Curso
+                            </a>
+                        </li>
+                    `;
+                });
+                resultadosDiv.innerHTML += '</ul>';
+            } else {
+                resultadosDiv.innerHTML = '<p class="text-muted mt-2"><i class="fas fa-info-circle"></i> Sin coincidencias.</p>';
+            }
+        } catch (error) {
+            console.error("Error al buscar:", error);
+            resultadosDiv.innerHTML = '<p class="text-danger mt-2">Error en la búsqueda.</p>';
+        }
+    });
+</script>
+
+</body>
+</html>

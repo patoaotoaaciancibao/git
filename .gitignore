@@ -1,0 +1,13 @@
+# Ignorar archivos de log
+*.log
+server.log
+home.log
+node_modules
+.idea
+/logs
+.env
+/assets/videos/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db

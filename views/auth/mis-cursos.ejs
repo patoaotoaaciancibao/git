@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head') %>
+    <meta charset="UTF-8">
+    <title>Mis Cursos | Freak’s</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<%- include('../partials/navbar') %>
+
+<section class="container py-5">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-graduation-cap me-2"></i> Mis Cursos
+    </h2>
+
+    <div class="row justify-content-center">
+        <% if (cursos.length === 0) { %>
+            <div class="col-md-6 text-center">
+                <p class="text-muted">Aún no estás inscrito/a ni asignado/a a ningún curso.</p>
+            </div>
+        <% } else { %>
+            <% cursos.forEach(curso => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">
+                                <i class="fas fa-book me-2"></i><%= curso.nombre %>
+                            </h5>
+                            <p class="card-text"><%= curso.descripcion %></p>
+                            <a href="/auth/curso/<%= curso.id_curso || curso.id %>" class="btn btn-outline-success">
+                                Ver curso <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</section>
+
+
+<%- include('../partials/footer') %>
+</body>
+</html>

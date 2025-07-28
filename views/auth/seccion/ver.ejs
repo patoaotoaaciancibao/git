@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= seccion.titulo %> — <%= curso.nombre %></title>
+  <%- include('../../partials/head') %>
+</head>
+<body>
+  <%- include('../../partials/navbar') %>
+
+  <div class="container py-5">
+
+    <!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <% if (categoria) { %>
+      <li class="breadcrumb-item">
+        <a href="/categoria/<%= categoria.id_categoria %>">
+          <%= categoria.nombre_categoria %>
+        </a>
+      </li>
+    <% } %>
+    <li class="breadcrumb-item">
+      <a href="/auth/curso/<%= curso.id_curso %>">
+        <%= curso.nombre %>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= seccion.titulo %>
+    </li>
+  </ol>
+</nav>
+
+
+    <!-- portada -->
+    <div class="text-center mb-4">
+      <img
+        src="<%= seccion.portada 
+                ? '/uploads/secciones/' + seccion.portada 
+                : '/secciones/default.png' %>"
+        alt="<%= seccion.titulo %>"
+        class="img-fluid rounded"
+        style="max-height: 400px;"
+      >
+    </div>
+
+    <!-- título -->
+    <h1 class="mb-4 text-center"><%= seccion.titulo %></h1>
+
+    <!-- botones -->
+    <div class="d-flex justify-content-between mt-5">
+      <a href="/auth/curso/<%= curso.id_curso %>" class="btn btn-secondary">
+        ← Volver al curso
+      </a>
+
+      <% if (nextSeccion) { %>
+        <a 
+          href="/auth/curso/<%= curso.id_curso %>/seccion/<%= nextSeccion.id_seccion %>" 
+          class="btn btn-primary"
+        >
+          Siguiente sección →
+        </a>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('../../partials/footer') %>
+</body>
+</html>

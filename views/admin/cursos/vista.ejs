@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Cursos</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/cursos-listado.css" rel="stylesheet"> <!-- CSS exclusivo para esta vista -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="cursos-listado body">
+
+<%- include('../../partials/navbar') %>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary fw-bold"><i class="fas fa-chalkboard-teacher me-2"></i>Listado de Cursos</h1>
+        <a href="/admin/home" class="btn btn-outline-secondary shadow-sm rounded-pill">
+            <i class="fas fa-arrow-left me-2"></i> Volver al Admin
+        </a>
+    </div>
+
+    <% if (cursos.length === 0) { %>
+        <div class="alert alert-info text-center shadow-sm">No hay cursos cargados aún.</div>
+    <% } else { %>
+        <div class="table-responsive shadow-sm rounded-4">
+            <table class="table table-hover align-middle table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>IMG</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Inscriptos</th>
+                    <th>Estado</th>
+                    <th>Personas</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% cursos.forEach((curso, i) => { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                    src="/cursos/<%= curso.imagen || 'default.png' %>"
+                                    alt="Imagen del curso"
+                                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;"
+                                    class="me-2"
+                                >
+                           </div>
+                        </td>
+                        <td><i class="fas fa-book me-1 text-primary"></i> <%= curso.nombre %></td>
+                        <td><%= curso.descripcion %></td>
+                        <td><%= curso.nombre_categoria || 'Sin categoría' %></td>
+                        <td><i class="fas fa-user-graduate me-1 text-success"></i> <%= curso.cantidad_inscriptos %></td>
+                        <td>
+                            <% if (Number(curso.publicado) === 1) { %>
+                                <span class="badge badge-publicado">Publicado</span>
+                            <% } else { %>
+                                <span class="badge badge-nopublicado">No Publicado</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="/admin/cursos/<%= curso.id %>/personas" class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="fas fa-users me-1"></i> Ver Personas
+                            </a>
+                        </td>
+                        <td>
+                             <a href="/admin/cursos/<%= curso.id %>/editar" class="btn btn-sm btn-outline-warning rounded-pill me-2">
+                                <i class="fas fa-edit me-1"></i> Editar
+                            </a>
+                        </td>
+
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+
+</div>
+
+<%- include('../../partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

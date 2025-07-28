@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title><%= curso.nombre %> | Curso</title>
+    <%- include('../partials/head') %>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('../partials/navbar') %>
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 rounded-4 p-4">
+
+        <div class="text-center">
+            <img src="/cursos/<%= curso.imagen || 'default.png' %>" class="img-fluid rounded mb-4" style="max-height: 300px;" alt="Imagen del curso">
+            <h1 class="text-primary fw-bold">
+                <i class="fas fa-graduation-cap me-2"></i><%= curso.nombre %>
+            </h1>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="mb-4 px-2">
+            <h5 class="text-secondary fw-semibold mb-2">📝 Descripción</h5>
+            <p class="fs-5 text-dark"><%= curso.descripcion || 'Sin descripción disponible.' %></p>
+        </div>
+
+        <% if (comentariosCurso && comentariosCurso.length > 0) { %>
+            <% if (promedioEstrellas) { %>
+                <div class="text-center mb-3">
+          <span class="fs-4 text-warning fw-bold">
+            ⭐ Promedio: <%= promedioEstrellas %> / 5
+          </span>
+                </div>
+            <% } %>
+
+            <h5 class="text-secondary mt-4"><i class="fas fa-comments me-2"></i>Comentarios de estudiantes</h5>
+            <div class="list-group mt-2">
+                <% comentariosCurso.forEach(comentario => { %>
+                    <div class="list-group-item py-3">
+                        <h6 class="mb-1 fw-bold"><%= comentario.nombre_usuario %></h6>
+                        <p class="mb-1 text-dark"><%= comentario.comentario %></p>
+                        <div>
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <i class="<%= i <= comentario.estrellas ? 'fas' : 'far' %> fa-star text-warning"></i>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-muted">📭 Aún no hay comentarios sobre este curso.</p>
+        <% } %>
+
+        <div class="text-center mt-5">
+            <a href="/cursos" class="btn btn-outline-primary px-4 py-2">
+                <i class="fas fa-arrow-left me-2"></i>Volver a cursos
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
